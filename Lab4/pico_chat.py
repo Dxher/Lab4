@@ -40,13 +40,13 @@ async def user_input_sender():
         await asyncio.sleep(0.1)         # yield control to receiver
 
 # KEEP ALIVE
-# This loop sends a heartbeat message every 5 seconds
+# This loop sends a heartbeat message every 10 seconds
 last_send = time.ticks_ms()
 async def keep_alive():
     global last_send
     while True:
         if time.ticks_diff(time.ticks_ms(), last_send) > 10000: # 10 seconds elapsed
-            heartbeat_msg = "Heartbeat"
+            heartbeat_msg = "keep alive"
             uart.write(heartbeat_msg + '\n') # send heartbeat
             print("[Sent]:", heartbeat_msg)
             last_send = time.ticks_ms() # reset timer
